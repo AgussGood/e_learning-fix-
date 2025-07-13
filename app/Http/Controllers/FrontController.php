@@ -3,9 +3,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use App\Models\Materi;
-use App\Models\User;
 use App\Models\Quiz;
 use App\Models\Tugas;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -15,7 +15,7 @@ class FrontController extends Controller
         // Ambil semua kelas untuk ditampilkan di filter
         $kelas = Kelas::all();
 
-        $quiz = Quiz::all();
+        $quiz  = Quiz::all();
         $query = User::where('role', 'guru');
         $guru  = $query->get();
 
@@ -25,22 +25,28 @@ class FrontController extends Controller
         } else {
             $materi = Materi::all(); // Ambil semua materi jika tidak ada filter
         }
-        
 
-        return view('welcome', compact('materi', 'kelas','guru','quiz'));
+        return view('welcome', compact('materi', 'kelas', 'guru', 'quiz'));
     }
-    public function quizz(Request $request)  {
-        $quiz = Quiz::all();
+    public function quizz(Request $request)
+    {
+        $quiz  = Quiz::all();
         $kelas = Kelas::all();
 
+        return view('quizz', compact('quiz', 'kelas'));
+    }
 
-                return view('quizz', compact('quiz','kelas'));
-     }
-
-    public function tugass(){
+    public function tugass()
+    {
         $tugas = Tugas::all();
         $kelas = Kelas::all();
 
-        return view('tugass', compact('tugass','kelas'));
+        return view('tugass', compact('tugass', 'kelas'));
+    }
+
+    public function isi($id)
+    {
+        $materi = Materi::findOrFail($id);
+        return view('isi', compact('materi'));
     }
 }

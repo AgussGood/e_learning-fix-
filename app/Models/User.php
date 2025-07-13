@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
         return $this->role === 'siswa';
     }
+
+    public function nilaiTugas()
+    {
+        return $this->hasMany(NilaiTugas::class, 'id_user');
+    }
 }

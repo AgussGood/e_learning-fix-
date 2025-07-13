@@ -73,6 +73,7 @@ class UserTugasController extends Controller
     public function hasil($id)
     {
         $hasil = NilaiTugas::where('id_user', Auth::id())->where('id_tugas', $id)->firstOrFail();
-        return view('user.tugas.hasil', compact('hasil'));
+        $jawaban = JawabanTugas::where('id_user', Auth::id())->where('id_tugas', $id)->firstOrFail();
+        return view('user.tugas.hasil', compact('hasil', 'jawaban'));
     }
 }

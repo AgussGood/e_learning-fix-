@@ -54,46 +54,28 @@ https://templatemo.com/tm-586-scholar
           <div class="owl-carousel owl-banner">
             <div class="item item-1">
               <div class="header-text">
-                <span class="category">Our Courses</span>
-                <h2>With Scholar Teachers, Everything Is Easier</h2>
-                <p>Scholar is free CSS template designed by TemplateMo for online educational related websites. This layout is based on the famous Bootstrap v5.3.0 framework.</p>
+                <span class="category">ESA</span>
+                <h2>Website E-Learning Untuk SMK Assalaam </h2>
+                <p>Digunakan Ketika Pembelajaran online atau daring untuk keperluan SMK Assalaam</p>
                 <div class="buttons">
-                  <div class="main-button">
-                    <a href="#">Request Demo</a>
-                  </div>
-                  <div class="icon-button">
-                    <a href="#"><i class="fa fa-play"></i> What's Scholar?</a>
-                  </div>
                 </div>
               </div>
             </div>
             <div class="item item-2">
               <div class="header-text">
-                <span class="category">Best Result</span>
-                <h2>Get the best result out of your effort</h2>
-                <p>You are allowed to use this template for any educational or commercial purpose. You are not allowed to re-distribute the template ZIP file on any other website.</p>
+                <span class="category">Terbaik untuk Anda</span>
+                <h2>Belajar kapan saja,dan raih sukses.</h2>
+                <p>Belajar dengan mudah di mana saja dengan menggunakan website</p>
                 <div class="buttons">
-                  <div class="main-button">
-                    <a href="#">Request Demo</a>
-                  </div>
-                  <div class="icon-button">
-                    <a href="#"><i class="fa fa-play"></i> What's the best result?</a>
-                  </div>
                 </div>
               </div>
             </div>
             <div class="item item-3">
               <div class="header-text">
-                <span class="category">Online Learning</span>
-                <h2>Online Learning helps you save the time</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporious incididunt ut labore et dolore magna aliqua suspendisse.</p>
+                <span class="category">E-Learning</span>
+                <h2>Website Online E-Learning</h2>
+                <p>Siap Membantu Anda Dalam Hal Pembelajaran Daring atau Online</p>
                 <div class="buttons">
-                  <div class="main-button">
-                    <a href="#">Request Demo</a>
-                  </div>
-                  <div class="icon-button">
-                    <a href="#"><i class="fa fa-play"></i> What's Online Course?</a>
-                  </div>
                 </div>
               </div>
             </div>
@@ -248,7 +230,7 @@ https://templatemo.com/tm-586-scholar
     <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 design">
         <div class="events_item">
             <div class="thumb">
-                <a href="#"><img src="{{ asset('frontend/assets/images/course-01.jpg')}}" alt=""></a>
+                <a href="{{ route('isi', $data->id) }}"><img src="{{ asset('storage/materi/' . $data->foto ) }}" alt="Eclipse Saga" class="main-image" style="widht:30" /></a>
                 <span class="category">
                     {{ $data->mapel->nama_mapel }}
                 </span>
