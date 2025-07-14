@@ -5,14 +5,14 @@
                   <nav class="main-nav">
                       <!-- ***** Logo Start ***** -->
                       <img src="{{ asset('backend/assets/images/logo/logo1.png') }}" alt="" style="width: 100px">
-                      <h1>Esa</h1> &nbsp &nbsp &nbsp
+                      <h1 class="text-white">Esa</h1> &nbsp &nbsp &nbsp
                       </a>
                       <!-- ***** Logo End ***** -->
                       <!-- ***** Menu Start ***** -->
                       <ul class="nav">
                           <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
                           <li class="scroll-to-section"><a href="{{ route('quizz') }}">Quiz</a></li>
-                          <li class="scroll-to-section"><a href="">Penugasan</a></li>
+                          <li class="scroll-to-section"><a href="{{ route('user.tugas.index') }}">Penugasan</a></li>
                           <li class="scroll-to-section"><a href="{{ route('register') }}">Register</a></li>
                           <li>
                               <a href="{{ route('logout') }}"

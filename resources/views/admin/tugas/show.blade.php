@@ -47,6 +47,10 @@
                                 <label>Mapel</label>
                                 <input type="text" name="mapel" value="{{ $tugas->mapel->nama_mapel }}" disabled/>
                             </div>
+                            <div class="input-style-1">
+                                <label>Tenggat Waktu</label>
+                                <input type="text" name="mapel" value="{{ $tugas->tenggat_waktu }}" disabled/>
+                            </div>
                         </div>
 
                         @foreach ($tugas->soal as $i => $item)

@@ -90,21 +90,16 @@
         <div class="container d-flex justify-content-between align-items-center py-3">
             <!-- Logo + Search -->
             <div class="d-flex align-items-center gap-3">
-                <h3 class="text-white fw-bold mb-0">SCHOLAR</h3>
-                <div class="search-box">
-                    <input type="text" placeholder="Type Something" />
-                    <i class="fas fa-search text-white ms-2"></i>
-                </div>
+                <img src="{{ asset('backend/assets/images/logo/logo1.png') }}" alt="" style="width: 40px">
+                      <h1 class="text-white">Esa</h1>
             </div>
 
             <!-- Menu -->
             <ul class="nav gap-4">
-                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Quiz</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Materi</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
-                <li class="nav-item"><a class="nav-link fw-semibold" href="#">Register Now!</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('welcome')}}">Beranda</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('quizz')}}">Quiz</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Penugasan</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="#">Register</a></li>
             </ul>
         </div>
     </nav>
@@ -120,54 +115,28 @@
         </div>
     </div>
 
-    <!-- LIST TUGAS -->
-    <div class="section events" id="events">
-        <div class="container">
-            @foreach ($tugas as $item)
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <div class="section-heading">
-                            <h2>Daftar Tugas</h2>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-6">
-                        <div class="item">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="service-item">
-                                            <div class="circle-icon">
-                                                <img src="{{ asset('frontend/assets/images/service-02.png') }}"
-                                                    alt="short courses">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <ul>
-                                        <li>
-                                            <span class="category">{{ $item->judul }}</span>
-                                            <h4>{{ $item->mapel->nama_mapel }}</h4>
-                                        </li>
-                                        <li>
-                                            <span>Dibuat:</span>
-                                            <h6>{{ $item->created_at->translatedFormat('d F Y') }}</h6>
-                                        </li>
-                                        <li>
-                                            <span>Deadline:</span>
-                                            <h6>22 Hours</h6>
-                                        </li>
-                                    </ul>
-                                    <a href="{{ route('tugas.kerjakan', $item->id) }}"><i
-                                            class="fa fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+<!-- LIST TUGAS -->
+<div class="container">
+  <div class="services section" id="services">
+    <div class="container">
+      <div class="row justify-content-center">
+        @foreach ($tugas as $item)
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="service-item">
+            <div class="main-content">
+              <h4>{{ $item->judul }}</h4>
+              <p>{{ $item->mapel->nama_mapel }}</p>
+              <div class="main-button">
+                <a href="{{ route('user.tugas.kerjakan', $item->id) }}">Kerjakan</a>
+              </div>
+            </div>
+          </div>
         </div>
+        @endforeach
+      </div>
     </div>
+  </div>
+</div>
 
     <!-- Script -->
     <script src="{{ asset('frontend/vendor/jquery/jquery.min.js') }}"></script>

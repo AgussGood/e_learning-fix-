@@ -2,22 +2,21 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <title>Hasil Tugas</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="{{ asset('frontend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('frontend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
   <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="{{ asset('frontend/assets/css/fontawesome.css') }}" />
-  <link rel="stylesheet" href="{{ asset('frontend/assets/css/templatemo-scholar.css') }}" />
-  <link rel="stylesheet" href="{{ asset('frontend/assets/css/owl.css') }}" />
-  <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.css') }}" />
-  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="{{ asset('frontend/assets/css/fontawesome.css') }}">
+  <link rel="stylesheet" href="{{ asset('frontend/assets/css/templatemo-scholar.css') }}">
+  <link rel="stylesheet" href="{{ asset('frontend/assets/css/owl.css') }}">
+  <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 
   <style>
     body {
@@ -76,24 +75,24 @@
 </head>
 
 <body>
-
-    <div class="container">
+  <div class="container">
     <div class="result-wrapper">
+      @isset($nilai)
         <div class="result-card text-center">
-          <h3>Hasil Tugas</h3>
-          <p>Nilai Anda: <strong>{{ $hasil->nilai }}</strong></p>
-           <p>Benar: <strong>{{ $jawaban->benar}}</strong></p>
+          <h3>Hasil Quiz</h3>
+          <p>Nilai Anda: <strong>{{ $nilai }}</strong></p>
 
           <div class="result-button">
-            <a href="{{ route('welcome') }}">Kembali</a>
+            <a href="{{ route('quizz') }}">Kembali</a>
           </div>
         </div>
+      @endisset
     </div>
   </div>
 
   @include('layouts.component-frontend.footer')
 
-  <!-- JS Scripts -->
+  <!-- Scripts -->
   <script src="{{ asset('frontend/vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ asset('frontend/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('frontend/assets/js/isotope.min.js') }}"></script>
@@ -101,5 +100,4 @@
   <script src="{{ asset('frontend/assets/js/counter.js') }}"></script>
   <script src="{{ asset('frontend/assets/js/custom.js') }}"></script>
 </body>
-
 </html>

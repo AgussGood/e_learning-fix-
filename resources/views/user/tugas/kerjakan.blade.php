@@ -21,56 +21,178 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.css') }}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css')}}" />
     <style>
-        input[type="radio"] {
-            accent-color: black;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f5f5;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .tugas-header {
+            background: linear-gradient(135deg, #7e5bef, #a779e9);
+            color: #fff;
+            padding: 25px 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+        }
+
+        .tugas-header h2 {
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .tugas-header h4 {
+            margin: 0;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .tugas-header p {
+            font-size: 14px;
+            margin: 0;
+            opacity: 0.95;
+        }
+
+        #countdown {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 15px;
+            background-color: #f3e8ff;
+            color: #6f42c1;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+        }
+
+        .info-note {
+            font-size: 14px;
+            color: red;
+            margin-top: 5px;
+        }
+
+        .card.question-card {
+            border: none;
+            border-left: 4px solid #7e5bef;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .card.question-card:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-check {
+            background-color: #f9f5ff;
+            border: 1px solid #e0d4ff;
+            border-radius: 6px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .form-check-input:checked {
+            background-color: #7e5bef;
+            border-color: #7e5bef;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #7e5bef, #a779e9);
+            border: none;
+            color: white;
+            padding: 12px 40px;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .tugas-note {
+            font-size: 13px;
+            color: #ffe6e6;
+            margin-top: 10px;
+            font-style: italic;
+            opacity: 0.9;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
     </style>
 
 
 <body>
-    <div class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="accordion" id="accordionExample">
-                        <h2 align="center" class="mb-5">Mengerjakan: <strong>{{ $tugas->judul }}</strong></h2>
-                        <form method="POST" action="{{ route('tugas.submit', $tugas->id) }}">
-                            @csrf
+    <div class="container">
+        <div class="tugas-header">
+            <h2>Mengerjakan Tugas</h2>
+            <h4>{{ $tugas->judul }}</h4>
 
-                            @foreach ($tugas->soal as $soal)
-                                <div class="accordion-item">
-                                    <div id="collapseOne" class="accordion-collapse collapse show"
-                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <h6 class="card-title">Soal {{ $loop->iteration }}</h6><br>
-                                            <h5 class="accordion-header" id="headingOne">
-                                                {{ $soal->pertanyaan }}
-                                            </h5> <br>
-                                            @foreach (['A', 'B', 'C', 'D'] as $opt)
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="jawaban[{{ $soal->id }}]" value="{{ $opt }}"
-                                                        id="soal{{ $soal->id }}_{{ $opt }}" required>
-                                                       <label class="form-check-label"
-                                                        for="soal{{ $soal->id }}_{{ $opt }}">
-                                                        {{ $opt }}.
-                                                        {{ $soal->{'pilihan_' . strtolower($opt)} }}
-                                                        </label>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-success px-5">Selesai</button>
+            @if ($tugas->deskripsi)
+                <p>{{ $tugas->deskripsi }}</p>
+            @endif
+
+        </div>
+
+
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        <form method="POST" action="{{ route('user.tugas.submit', $tugas->id) }}">
+            @csrf
+            @foreach ($tugas->soal as $soal)
+                <div class="card question-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Soal {{ $loop->iteration }}</h5>
+                        <p class="card-text">{{ $soal->pertanyaan }}</p>
+
+                        @foreach (['A', 'B', 'C', 'D'] as $opt)
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="jawaban[{{ $soal->id }}]"
+                                    value="{{ $opt }}" id="soal{{ $soal->id }}_{{ $opt }}"
+                                    required>
+                                <label class="form-check-label" for="soal{{ $soal->id }}_{{ $opt }}">
+                                    {{ $opt }}.
+                                    {{ $soal->{'pilihan_' . strtolower($opt)} }}
+                                </label>
                             </div>
-                        </form>
+                        @endforeach
+
+                        @error("jawaban.{$soal->id}")
+                            <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
+            @endforeach
+
+            <div class="text-center mt-4">
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane me-2"></i> Selesaikan tugas
+                </button>
             </div>
-        </div>
+        </form>
     </div>
+
 </body>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 

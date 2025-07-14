@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nilai_quizzes', function (Blueprint $table) {
+        Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->unsignedBigInteger('id_quiz');
-            $table->string('skor');
+            $table->string('kode_quiz')->unique();
+            $table->string('judul');
+            $table->integer('jumlah_soal');
+            $table->unsignedBigInteger('id_mapel');
+            $table->date('tenggat_waktu');
+            $table->integer('durasi');
             $table->timestamps();
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_quiz')->references('id')->on('quizzes')->onDelete('cascade');
+            $table->foreign('id_mapel')->references('id')->on('mapels')->onDelete('cascade');
         });
     }
 
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nilai_quizzes');
+        Schema::dropIfExists('quizzes');
     }
 };
