@@ -50,6 +50,8 @@
     </div>
   </div>
 
+  @include('layouts.component-frontend.footer')
+
   <!-- Scripts -->
   <script src="{{ asset('frontend/vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ asset('frontend/vendor/bootstrap/js/bootstrap.min.js') }}"></script>

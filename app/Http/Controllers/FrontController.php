@@ -71,7 +71,7 @@ class FrontController extends Controller
     {
         $quiz = Quiz::with('soal')->where('kode_quiz', $kode)->first();
 
-        return view('kerjakan', compact('quiz'));
+        return view('user.quiz.kerjakan', compact('quiz'));
     }
 
     // Menyimpan hasil pengerjaan
@@ -117,6 +117,13 @@ class FrontController extends Controller
             }
         }
 
-        return view('hasil', compact('nilai'));
+        return view('user.quiz.hasil', compact('nilai'));
+    }
+
+
+    public function profil($id)
+    {
+        $user = User::findOrFail($id);
+        return view('profil', compact('user'));
     }
 }

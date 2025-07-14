@@ -34,8 +34,8 @@
             width: 50px;
             /* Ukuran ikon */
             height: auto;
-           filter: brightness(0) invert(1); 
-           transition: transform 0.3s ease;
+            filter: brightness(0) invert(1);
+            transition: transform 0.3s ease;
             /* Agar ikon SVG PNG hitam jadi putih */
         }
 
@@ -91,13 +91,13 @@
             <!-- Logo + Search -->
             <div class="d-flex align-items-center gap-3">
                 <img src="{{ asset('backend/assets/images/logo/logo1.png') }}" alt="" style="width: 40px">
-                      <h1 class="text-white">Esa</h1>
+                <h1 class="text-white">Esa</h1>
             </div>
 
             <!-- Menu -->
             <ul class="nav gap-4">
-                <li class="nav-item"><a class="nav-link" href="{{ route('welcome')}}">Beranda</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('quizz')}}">Quiz</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Beranda</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('quizz') }}">Quiz</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Penugasan</a></li>
                 <li class="nav-item"><a class="nav-link fw-semibold" href="#">Register</a></li>
             </ul>
@@ -115,28 +115,49 @@
         </div>
     </div>
 
-<!-- LIST TUGAS -->
-<div class="container">
-  <div class="services section" id="services">
-    <div class="container">
-      <div class="row justify-content-center">
-        @foreach ($tugas as $item)
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="service-item">
-            <div class="main-content">
-              <h4>{{ $item->judul }}</h4>
-              <p>{{ $item->mapel->nama_mapel }}</p>
-              <div class="main-button">
-                <a href="{{ route('user.tugas.kerjakan', $item->id) }}">Kerjakan</a>
-              </div>
+    <!-- LIST TUGAS -->
+
+    <div class="section events" id="events">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-heading">
+                        <h2>Daftar Tugas</h2>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-6">
+                    <div class="item">
+                        <div class="row">
+                            @foreach ($tugas as $item)
+                            <div class="col-lg-3">
+                                <div class="circle-icon">
+                                    <img src="{{asset('frontend/assets/images/service-02.png')}}" style="width: 80px" alt="short courses">
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <ul>
+                                    <li>
+                                        <span class="category">{{ $item->judul }}</span>
+                                        <h4>{{ $item->mapel->nama_mapel }}</h4>
+                                    </li>
+                                    <li>
+                                        <span>Date:</span>
+                                        <h6>{{ $item->created_at->translatedFormat('d F Y') }}</h6>
+                                    </li>
+                                    <li>
+                                        <span>Deaadline:</span>
+                                        <h6>{{ $item->tenggat_waktu->format('d F Y') }}</h6>
+                                    </li>
+                                </ul>
+                                <a href="{{ route('user.tugas.kerjakan', $item->id) }}"><i class="fa fa-angle-right"></i></a>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        @endforeach
-      </div>
     </div>
-  </div>
-</div>
 
     <!-- Script -->
     <script src="{{ asset('frontend/vendor/jquery/jquery.min.js') }}"></script>

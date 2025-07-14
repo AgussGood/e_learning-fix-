@@ -15,13 +15,13 @@
                           <li class="scroll-to-section"><a href="{{ route('user.tugas.index') }}">Penugasan</a></li>
                           <li class="scroll-to-section"><a href="{{ route('register') }}">Register</a></li>
                           <li>
-                              <a href="{{ route('logout') }}"
-                                  onclick="event.preventDefault();
-                                  document.getElementById('logout-form').submit();">
-                                  <i class="lni lni-exit"></i> Sign Out </a>
-                              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                  @csrf
-                              </form>
+                              <div class="author-info flex items-center !p-1">
+                                  <div class="image"><a href="{{ route('profil', Auth::user()->id) }}">
+                                      <img src="{{ asset('backend/assets/images/profile/profile-image.png') }}"
+                                          alt="image" style="width: 50px">
+                                        </a>
+                                  </div>
+                              </div>
                           </li>
                       </ul>
                       <a class='menu-trigger'>

@@ -103,7 +103,6 @@ class MateriController extends Controller
         $materi->id_kelas   = $request->id_kelas;
 
         if ($request->hasFile('foto')) {
-
             $img  = $request->file('foto');
             $name = rand(1000, 9999) . $img->getClientOriginalName();
             $img->move('storage/materi', $name);

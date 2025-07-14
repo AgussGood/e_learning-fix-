@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('judul');
             $table->integer('jumlah_soal');
             $table->unsignedBigInteger('id_mapel');
-            $table->date('tenggat_waktu');
+            $table->timestamp('tenggat_waktu')->nullable();
             $table->integer('durasi');
             $table->timestamps();
             $table->foreign('id_mapel')->references('id')->on('mapels')->onDelete('cascade');
+
         });
     }
 
