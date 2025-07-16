@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Mapel;
+use Illuminate\Http\Request;
 
 class MapelController extends Controller
 {
@@ -36,22 +35,21 @@ class MapelController extends Controller
      */
     public function store(Request $request)
     {
-    $request->validate([
-        'nama_mapel' => 'required|string|max:100',
-    ]);
+        $validated = $request->validate([
+            'nama_mapel' => 'required',
+        ]);
 
-    $lastRecord = Mapel::latest('id')->first();
-    $lastId = $lastRecord ? $lastRecord->id : 0;
-    $kode_mapel = 'MPL-' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
+        $lastRecord = Mapel::latest('id')->first();
+        $lastId     = $lastRecord ? $lastRecord->id : 0;
+        $kode_mapel = 'MPL-' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
 
-    $mapel = new Mapel();
-    $mapel->kode_mapel = $kode_mapel; 
-    $mapel->nama_mapel = $request->nama_mapel;
-    $mapel->save();
+        $mapel             = new Mapel();
+        $mapel->kode_mapel = $kode_mapel;
+        $mapel->nama_mapel = $request->nama_mapel;
+        $mapel->save();
 
-    return redirect()->route('mapel.index')->with('success', 'Mapel berhasil ditambahkan.');
+        return redirect()->route('mapel.index')->with('success', 'Mapel berhasil ditambahkan.');
     }
-
 
     /**
      * Display the specified resource.
@@ -74,7 +72,7 @@ class MapelController extends Controller
     public function edit($id)
     {
         $mapel = Mapel::findOrfail($id);
-        return view('admin.mapel.edit',compact('mapel'));
+        return view('admin.mapel.edit', compact('mapel'));
     }
 
     /**
@@ -84,19 +82,18 @@ class MapelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nama_mapel' => 'required|string|max:100',
         ]);
 
-        $mapel = Mapel::findOrFail($id);
+        $mapel             = Mapel::findOrFail($id);
         $mapel->nama_mapel = $request->nama_mapel;
         $mapel->save();
 
         return redirect()->route('mapel.index')->with('success', 'Mapel berhasil diupdate.');
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -106,7 +103,7 @@ class MapelController extends Controller
      */
     public function destroy($id)
     {
-         $mapel = Mapel::findOrFail($id);
+        $mapel = Mapel::findOrFail($id);
         $mapel->delete();
 
         return redirect()->route('mapel.index')->with('success', 'Mapel berhasil dihapus.');

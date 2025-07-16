@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <!-- input style start -->
-                        <form action="{{ route('materi.update', $materi->id) }}" method="post">
+                        <form action="{{ route('materi.update', $materi->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="card-style mb-30">
@@ -48,7 +48,10 @@
                                 <!-- foto -->
                                 <div class="mb-3">
                                 <label for="foto">Foto</label>
-                                <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto">
+                                <img src="{{ asset('/storage/materi/' . $materi->foto) }}" width="100">
+                                <input type="file" class="form-control" name="foto"
+                            id="putih" style="color: #000; background-color: #f5f5f5;" accept="image/*" value="{{ $materi->foto }}">
+                            
                                 @error('foto')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

@@ -10,18 +10,17 @@
                       <!-- ***** Logo End ***** -->
                       <!-- ***** Menu Start ***** -->
                       <ul class="nav">
-                          <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                          <li class="scroll-to-section"><a href="{{ route('welcome') }}" class="active">Beranda</a></li>
                           <li class="scroll-to-section"><a href="{{ route('quizz') }}">Quiz</a></li>
                           <li class="scroll-to-section"><a href="{{ route('user.tugas.index') }}">Penugasan</a></li>
-                          <li class="scroll-to-section"><a href="{{ route('register') }}">Register</a></li>
                           <li>
-                              <div class="author-info flex items-center !p-1">
-                                  <div class="image"><a href="{{ route('profil', Auth::user()->id) }}">
-                                      <img src="{{ asset('backend/assets/images/profile/profile-image.png') }}"
-                                          alt="image" style="width: 50px">
-                                        </a>
-                                  </div>
-                              </div>
+                              @if (Auth::check())
+                                  <a href="{{ route('profil', Auth::user()->id) }}"><img
+                                          src="{{ asset('backend/assets/images/profile/profile-image.png') }}"
+                                          alt="image" style="width: 40px"></a>
+                              @else
+                                  <a href="{{ route('login') }}">Login</a>
+                              @endif
                           </li>
                       </ul>
                       <a class='menu-trigger'>

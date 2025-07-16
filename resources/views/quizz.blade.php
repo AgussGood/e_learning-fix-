@@ -15,45 +15,179 @@
 
 
     <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/templatemo-scholar.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/owl.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.css') }}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css')}}" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <div class="services section" id="services">
-        <div class="container" align="center">
+    <style>
+        /* Navbar */
+        .navbar-custom {
+            background: linear-gradient(135deg, #7e5bef, #a779e9);
+            border-radius: 0 0 25px 25px;
+            box-shadow: 0 4px 15px rgba(126, 91, 239, 0.25);
+        }
+
+        .navbar-custom {
+            margin-bottom: 0;
+            /* default */
+        }
+
+
+        .search-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            padding: 5px 15px;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            color: white;
+            width: 150px;
+            margin-left: 8px;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: white !important;
+            transition: 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #ffe8f8 !important;
+        }
+
+        /* Main Section */
+        .services.section {
+            padding-top: 40px !important;
+            /* dari 100px jadi 40px */
+            min-height: auto;
+            /* hilangkan tinggi minimum */
+            background: linear-gradient(120deg, #f8f5ff, #ffffff);
+            display: flex;
+            align-items: center;
+        }
+
+
+        .form-card {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(126, 91, 239, 0.15);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(126, 91, 239, 0.25);
+        }
+
+        .form-card h4 {
+            font-weight: 700;
+            color: #7e5bef;
+            margin-bottom: 25px;
+        }
+
+        .form-card input.form-control {
+            border-radius: 12px;
+            border: 2px solid #d4c8ff;
+            padding: 14px;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .form-card input:focus {
+            border-color: #a779e9;
+            box-shadow: 0 0 0 3px rgba(167, 121, 233, 0.2);
+        }
+
+        .main-button button {
+            margin-top: 20px;
+            background: linear-gradient(135deg, #7e5bef, #a779e9);
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: 0.3s ease;
+        }
+
+        .main-button button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(126, 91, 239, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .search-box input {
+                width: 100px;
+            }
+
+            .nav-link {
+                font-size: 14px;
+            }
+        }
+    </style>
+
+
+    <!-- NAVBAR -->
+    <!-- NAVBAR -->
+    <nav class="navbar-custom">
+        <div class="container d-flex justify-content-between align-items-center py-3">
+            <div class="d-flex align-items-center gap-3">
+                <img src="{{ asset('backend/assets/images/logo/logo1.png') }}" alt="" style="width: 40px">
+                <h1 class="text-white">Esa</h1>
+            </div>
+            <ul class="nav gap-3">
+                <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Beranda</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('quizz') }}">Quiz</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('user.tugas.index') }}">Penugasan</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN SECTION -->
+    <div class="services section">
+        <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-item">
-                        <div class="main-content">
-                           <a href="{{route('welcome')}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
-                                class="bi bi-arrow-left-square" viewBox="0 0 16 16" style="position: absolute; top: 10px; left: 10px;">
-                                <path fill-rule="evenodd"
-                                    d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
-                            </svg></a>
-                            <form method="POST" action="{{ route('periksaKode') }}" id="periksaForm">
-                                @csrf
-                                <h4>Masukan Code Quiz</h4>
-                                <input name="kode" type="text" class="form-control" required>
-                                <p></p>
-                                <p></p>
-                                <div class="main-button">
-                                    <button type="submit" class="btn btn-primary">Periksa Kode</button>
-                                </div>
-                            </form>
-                        </div>
+                <div class="col-md-6 col-lg-5">
+                    <div class="form-card">
+                        <form method="POST" action="{{ route('periksaKode') }}" id="periksaForm">
+                            @csrf
+                            <h4><i class="fas fa-key me-2"></i>Masukkan Kode Quiz</h4>
+                            <input name="kode" type="text" class="form-control" required
+                                placeholder="Contoh: ABC123">
+                            <div class="main-button">
+                                <button type="submit"><i class="fas fa-check-circle me-2"></i>Periksa Kode</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+    </div>
+    </div>
 
-    </div>
-    </div>
-    </section>
+
+
+
 
     @include('layouts.component-frontend.footer')
 

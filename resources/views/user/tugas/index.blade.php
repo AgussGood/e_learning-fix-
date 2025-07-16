@@ -98,8 +98,7 @@
             <ul class="nav gap-4">
                 <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Beranda</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('quizz') }}">Quiz</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Penugasan</a></li>
-                <li class="nav-item"><a class="nav-link fw-semibold" href="#">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('user.tugas.index') }}">Penugasan</a></li>
             </ul>
         </div>
     </nav>

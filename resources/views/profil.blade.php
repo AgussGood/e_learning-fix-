@@ -40,7 +40,7 @@
 
                             <div class="row justify-content-center mt-4">
                                 <div class="col-md-6 text-start">
-                                    <p><strong>Kelas:</strong> {{ $user->kelas->nama ?? '-' }}</p>
+                                    <p><strong>Kelas:</strong> {{ $user->kelas->kelas }}</p>
                                     <p><strong>Status:</strong> {{ ucfirst($user->role) }}</p>
                                 </div>
                             </div>

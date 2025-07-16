@@ -9,7 +9,7 @@ class SoalQuiz extends Model
 {
     use HasFactory; 
         protected $fillable = [
-        'quiz_id',
+        'id_quiz',
         'pertanyaan',
         'pilihan_a',
         'pilihan_b',

@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -16,6 +14,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'foto',
         'role',
     ];
 
@@ -43,9 +42,18 @@ class User extends Authenticatable
     {
         return $this->role === 'siswa';
     }
-
-    public function nilaiTugas()
+    public function kelas()
     {
-        return $this->hasMany(NilaiTugas::class, 'id_user');
+        return $this->belongsTo(Kelas::class, 'id_kelas');
     }
+
+    public function tahunAjaran()
+    {
+        return $this->belongsTo(TahunAjaran::class, 'id_tahun_ajaran');
+    }
+    public function kelasDiampu()
+    {
+        return $this->belongsToMany(Kelas::class, 'guru_kelas', 'user_id', 'kelas_id');
+    }
+
 }

@@ -16,7 +16,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item">
-                                        <a href="{{ route('home')}}">Dashboard</a>
+                                        <a href="">Dashboard</a>
                                     </li>
                                     <li class="breadcrumb-item active" aria-current="page">
                                         Materi
@@ -81,15 +81,11 @@
                                                 <td class="min-width">
                                                     <p>{{ $data->judul }}</p>
                                                 </td>
-                                                <td>
-                                                @if ($data->foto)
-                                                    <img src="{{ asset('storage/materi/' . $data->foto) }}" alt="Foto Materi" width="100">
-                                                @else
-                                                    <span>Tidak ada gambar</span>
-                                                @endif
+                                                <td class="min-width">
+                                              <img src="{{ asset('storage/materi/' . $data->foto)}}" width="50" >
                                             </td>
                                                 <td class="min-width">
-                                                    <p>{{ Str::limit($data->isi_materi, 20) }}</p>
+                                                    <p>{{ Str::limit($data->isi_materi, 100) }}</p>
                                                 </td>
                                                 <td class="min-width">
                                                     <p>{{ $data->mapel->nama_mapel }}</p>

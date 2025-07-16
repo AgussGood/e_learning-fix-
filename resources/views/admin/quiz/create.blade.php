@@ -37,6 +37,7 @@
               $jumlah_soal = request('jumlah_soal');
               $durasi = request('durasi');
               $tenggat_waktu = request('tenggat_waktu');
+              $id_kelas = request('id_kelas');
             @endphp
 
             <form action="{{ route('quiz.store') }}" method="POST">
@@ -46,6 +47,7 @@
               <input type="hidden" name="jumlah_soal" value="{{ $jumlah_soal }}">
               <input type="hidden" name="durasi" value="{{ $durasi }}">
               <input type="hidden" name="tenggat_waktu" value="{{ $tenggat_waktu }}">
+              <input type="hidden" name="id_kelas" value="{{ $id_kelas }}">
 
               @for($i = 0; $i < $jumlah_soal; $i++)
               <div class="card-style mb-30">
@@ -58,7 +60,7 @@
                 @foreach(['A', 'B', 'C', 'D'] as $option)
                   <div>
                     <input type="radio" name="jawaban_benar[{{ $i }}]" value="{{ $option }}" required>
-                    {{ $option }} <input type="text" name="opsi[{{ $i }}][{{ $option }}]" placeholder="Jawaban {{ $option }}" required>
+                    {{ $option }} <input type="text" class="form-control" name="opsi[{{ $i }}][{{ $option }}]" placeholder="Jawaban {{ $option }}" required>
                   </div>
                 @endforeach
               </div>
@@ -92,6 +94,19 @@
                     </div>
                   </div>
                 </div>
+                <div class="input-style-1">
+                  <label>Kelas</label>
+                  <div class="select-style-1">
+                    <div class="select-position">
+                      <select name="id_kelas" required>
+                        <option disabled selected value="">Pilih Kelas</option>
+                       @foreach ($kelas as $item)
+                          <option value="{{ $item->id }}">{{ $item->kelas }}</option>
+                      @endforeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
 
                 <div class="input-style-1">
                   <label>Jumlah Soal</label>
@@ -105,7 +120,7 @@
 
                 <div class="input-style-1">
                   <label>Tenggat Waktu</label>
-                  <input type="date" name="tenggat_waktu" required />
+                  <input type="datetime-local" name="tenggat_waktu" class="form-control" required>
                 </div>
 
                 <div class="col-12">

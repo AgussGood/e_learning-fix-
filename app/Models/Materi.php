@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Materi extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'judul', 'foto', 'isi_materi', 'id_mapel', 'id_kelas', 'id_guru', 'create_at', 'update_at'];
+    protected $fillable = ['id', 'judul', 'isi_materi', 'id_mapel', 'id_kelas', 'id_guru', 'foto', 'create_at', 'update_at'];
     public $timestamps  = true;
 
     public function mapel()
@@ -22,5 +22,4 @@ class Materi extends Model
     {
         return $this->belongsTo(User::class, 'id_guru');
     }
-    
 }

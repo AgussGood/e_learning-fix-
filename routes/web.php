@@ -8,6 +8,7 @@ use App\Http\Controllers\MateriController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\RekapController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TugasController;
 use App\Http\Controllers\UserQuizController;
 use App\Http\Controllers\UserTugasController;
@@ -24,9 +25,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [FrontController::class, 'index'])->name('welcome');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Auth::routes(['register' => false]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('user{id}', [App\Http\Controllers\FrontController::class, 'profil'])->name('profil');
 
+Route::middleware(['auth', 'role:siswa'])->group(function () {
+    Route::get('/kelas', [KelasController::class, 'list'])->name('kelas.list');
+    Route::post('/kelas/{kelas}/join', [KelasController::class, 'join'])->name('kelas.join');
+});
 
 Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
     Route::get('/tugas', [UserTugasController::class, 'index'])->name('tugas.index');
@@ -41,6 +52,10 @@ Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
 
 // Public
 
+Route::resource('tahun_ajaran', TahunAjaranController::class)->middleware('auth');
+Route::post('/tahun-ajaran/{id}/set-aktif', [TahunAjaranController::class, 'setAktif'])
+    ->name('tahun_ajaran.setAktif');
+
 Route::get('/materi/{id}/isi', [FrontController::class, 'isi'])->name('isi');
 
 Route::get('/', [FrontController::class, 'index'])->name('welcome');
@@ -53,19 +68,18 @@ Route::get('/tugass', [FrontController::class, 'tugass'])->name('tugass');
 // Admin only
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('guru', GuruController::class);
+    Route::resource('siswa', SiswaController::class);
     Route::resource('mapel', MapelController::class);
     Route::resource('kelas', KelasController::class);
+    Route::get('guru/{id}/assign-kelas', [GuruController::class, 'showAssignKelasForm'])->name('guru.assignKelasForm');
+    Route::post('guru/{id}/assign-kelas', [GuruController::class, 'assignKelas'])->name('guru.assignKelas');
+
 });
 
 // Guru and Admin
 Route::prefix('guru')->middleware(['auth', 'role:guru'])->group(function () {
-    Route::resource('siswa', SiswaController::class);
     Route::resource('quiz', QuizController::class);
     Route::resource('tugas', TugasController::class);
     Route::resource('materi', MateriController::class);
     Route::resource('rekap', RekapController::class);
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

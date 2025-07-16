@@ -23,6 +23,12 @@ return new class extends Migration
 
             // Tambahkan kolom role di sini
             $table->enum('role', ['admin', 'guru', 'siswa'])->default('siswa');
+            $table->unsignedBigInteger('id_kelas')->nullable();
+            $table->unsignedBigInteger('id_tahun_ajaran')->nullable();
+
+            $table->foreign('id_kelas')->references('id')->on('kelas')->onDelete('set null');
+            $table->foreign('id_tahun_ajaran')->references('id')->on('tahun_ajarans')->onDelete('set null');
+
             $table->rememberToken();
             $table->timestamps();
         });

@@ -32,6 +32,7 @@
             <h2>{{ $materi->mapel->nama_mapel }}</h2>
             <h5>{{ $materi->judul }}</h5>
             <p>{{ $materi->isi_materi }}</p>
+            <a href="{{ route('welcome') }}" class="btn btn-secondary">Kembali</a>
           </div>
         </div>
 

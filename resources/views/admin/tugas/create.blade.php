@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col-md-6">
           <div class="title">
-            <h2>Form Quiz</h2>
+            <h2>Form Tugas</h2>
           </div>
         </div>
         <div class="col-md-6">
@@ -16,8 +16,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#0">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="#0">Forms</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Form Elements</li>
+                <li class="breadcrumb-item active" aria-current="page">Form tugas</li>
               </ol>
             </nav>
           </div>
@@ -39,10 +38,10 @@
 
             <form action="{{ route('tugas.store') }}" method="POST">
               @csrf
-              <input type="hidden" name="judul" value="{{ $judul }}">
-              <input type="hidden" name="id_mapel" value="{{ $id_mapel }}">
-              <input type="hidden" name="jumlah_soal" value="{{ $jumlah_soal }}">
-              <input type="hidden" name="tenggat_waktu" value="{{ request('tenggat_waktu') }}">
+              <input type="hidden" name="judul" class="@error('judul') is-invalid @enderror" value="{{ $judul }}">
+              <input type="hidden" name="id_mapel" class="@error('id_mapel') is-invalid @enderror" value="{{ $id_mapel }}">
+              <input type="hidden" name="jumlah_soal" class="@error('jumlah_soal') is-invalid @enderror" value="{{ $jumlah_soal }}">
+              <input type="hidden" name="tenggat_waktu" class="@error('tenggat_waktu') is-invalid @enderror" value="{{ request('tenggat_waktu') }}">
 
 
 
@@ -57,7 +56,7 @@
                 @foreach(['A', 'B', 'C', 'D'] as $option)
                   <div>
                     <input type="radio" name="jawaban_benar[{{ $i }}]" value="{{ $option }}" required>
-                    {{ $option }} <input type="text" name="opsi[{{ $i }}][{{ $option }}]" placeholder="Jawaban {{ $option }}" required>
+                    {{ $option }} <input type="text" class="form-control" name="opsi[{{ $i }}][{{ $option }}]" placeholder="Jawaban {{ $option }}" required>
                   </div>
                 @endforeach
               </div>
@@ -87,6 +86,19 @@
                         <option disabled selected value="">Pilih Mapel</option>
                         @foreach($mapel as $m)
                           <option value="{{ $m->id }}">{{ $m->nama_mapel }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-style-1">
+                  <label>Kelas</label>
+                  <div class="select-style-1">
+                    <div class="select-position">
+                      <select name="id_kelas" required>
+                        <option disabled selected value="">Pilih Kelas</option>
+                       @foreach($guru->kelasDiampu as $kelas)
+                            <option value="{{ $kelas->id }}">{{ $kelas->kelas }}</option>
                         @endforeach
                       </select>
                     </div>

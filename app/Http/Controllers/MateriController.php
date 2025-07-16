@@ -38,6 +38,7 @@ class MateriController extends Controller
     {
         $request->validate([
             'judul'      => 'required|string',
+            'foto'  => 'required|mimes:jpg,png|max:5024',
             'isi_materi' => 'required',
             'id_mapel'   => 'required',
             'id_kelas'   => 'required',
@@ -52,10 +53,8 @@ class MateriController extends Controller
 
         if ($request->hasFile('foto')) {
             $img  = $request->file('foto');
-            $name = rand(1000, 9999) . '_' . $img->getClientOriginalName();
-
-            $img->storeAs('public/materi', $name);
-
+            $name = rand(1000, 9999) . $img->getClientOriginalName();
+            $img->move('storage/materi', $name);
             $materi->foto = $name;
         }
 
@@ -103,15 +102,19 @@ class MateriController extends Controller
         $materi->id_kelas   = $request->id_kelas;
 
         if ($request->hasFile('foto')) {
+            if ($materi->foto && file_exists(public_path('storage/materi/' . $materi->foto))) {
+                unlink(public_path('storage/materi/' . $materi->foto));
+            }
+
             $img  = $request->file('foto');
-            $name = rand(1000, 9999) . $img->getClientOriginalName();
-            $img->move('storage/materi', $name);
+            $name = time() . '_' . $img->getClientOriginalName();
+            $img->move(public_path('storage/materi'), $name);
             $materi->foto = $name;
         }
 
         $materi->save();
 
-        return redirect()->route('materi.index')->with('success', 'Materi berhasil diupdate.');
+        return redirect()->route('materi.index')->with('success', 'Materi berhasil diup date.');
 
     }
 

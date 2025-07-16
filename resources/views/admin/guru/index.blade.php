@@ -16,6 +16,7 @@
             <i class="mdi mdi-plus-box"></i> Tambah
         </a>
     </div>
+    
     <form action="{{ route('guru.index') }}" method="get" class="d-flex" style="max-width: 300px;">
         <button class="btn btn-outline-primary btn-sm" type="submit">
             <i class="lni lni-search-alt"></i>
@@ -30,7 +31,6 @@
                             <th scope="col">No</th>
                             <th scope="col">Nama<i class="lni lni-arrows-vertical"></i></th>
                             <th scope="col">Email<i class="lni lni-arrows-vertical"></i></th>
-                            <th scope="col">Foto<i class="lni lni-arrows-vertical"></i></th>
                             <th scope="col">Aksi<i class="lni lni-arrows-vertical"></i></th>
                           </tr>
                         </thead>
@@ -41,14 +41,12 @@
                             <th scope="row">{{ $no++ }}</th>
                             <td>{{ $data->name }}</td>
                             <td>{{ $data->email }}</td>
-                            <td>
-                            @if ($data->foto)
-                            <img src="{{ asset('storage/guru/' . $data->foto) }}" alt="Foto Guru" width="100">
-                            @else
-                            <span>Tidak ada gambar</span>
-                            @endif
+                            
+                             <td>
+                                <a href="{{ route('guru.assignKelasForm', $data->id) }}" class="btn btn-sm btn-warning">Assign Kelas</a>
                             </td>
-                                    <td>
+                            
+                           <td>
                                         <div class="action justify-content">
                                             <div class="dropdown">
                                                 <button class="more-btn ml-10 dropdown-toggle" id="moreAction1" data-bs-toggle="dropdown" aria-expanded="false">

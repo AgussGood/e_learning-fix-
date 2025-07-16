@@ -12,7 +12,7 @@ class KelasController extends Controller
     public function index()
     {
         $kelas = Kelas::all();
-        
+
         return view('admin.kelas.index', compact('kelas'));
 
     }
@@ -31,9 +31,9 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        // $validated = $request->validate([
-        //     'kelas' => 'required|unique:kelas',
-        //  ]);
+        $validated = $request->validate([
+            'kelas' => 'required|unique:kelas',
+         ]);
 
         $kelas        = new Kelas();
         $kelas->kelas = $request->kelas;
@@ -47,9 +47,10 @@ class KelasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Kelas $kelas)
     {
-        //
+        $kelas->load(['tahunAjaran', 'siswa']); // eager‐load siswa
+        return view('kelas.show', compact('kelas'));
     }
 
     /**
@@ -90,4 +91,29 @@ class KelasController extends Controller
         return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus');
 
     }
+    public function list()
+    {
+        $kelas = Kelas::with('tahunAjaran')->get();
+        return view('admin.kelas.list', compact('kelas'));
+    }
+
+    // siswa join kelas
+    public function join(Request $request, Kelas $kelas)
+    {
+        $user = $request->user();
+
+        // validasi: pastikan tahun ajaran kelas = aktif?
+        if (! $kelas->tahunAjaran || ! $kelas->tahunAjaran->is_active) {
+            return back()->with('error', 'Tahun ajaran tidak aktif.');
+        }
+
+        $user->id_kelas        = $kelas->id;
+        $user->id_tahun_ajaran = $kelas->id_tahun_ajaran;
+        $user->save();
+
+        return back()->with('success', 'Berhasil bergabung ke kelas!');
+    }
+
+    // detail kelas (guru / admin)
+
 }

@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('kode_quiz')->unique();
             $table->string('judul');
             $table->integer('jumlah_soal');
+            $table->foreignId('id_kelas')->nullable()->constrained('kelas')->onDelete('set null');
             $table->unsignedBigInteger('id_mapel');
+            $table->string('foto')->nullable();
             $table->timestamp('tenggat_waktu')->nullable();
             $table->integer('durasi');
             $table->timestamps();
